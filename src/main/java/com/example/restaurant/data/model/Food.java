@@ -17,23 +17,26 @@ public class Food {
         this.id = 0;
         this.foodName = "";
         this.price = BigDecimal.ZERO;
+        this.imageUrl = "";
         this.dateCreated = LocalDateTime.now();
         this.dateUpdated = LocalDateTime.now();
     }
 
-    public Food(int id, String foodName, BigDecimal price) {
+    public Food(int id, String foodName, BigDecimal price, String imageUrl) {
         this.id = id;
         this.foodName = foodName;
         this.price = price;
+        this.imageUrl = imageUrl;
         this.dateCreated = LocalDateTime.now();
         this.dateUpdated = LocalDateTime.now();
     }
 
-    public Food(int id, String foodName, BigDecimal price, LocalDateTime dateCreated,
+    public Food(int id, String foodName, BigDecimal price, String imageUrl, LocalDateTime dateCreated,
             LocalDateTime dateUpdated) {
         this.id = id;
         this.foodName = foodName;
         this.price = price;
+        this.imageUrl = imageUrl;
         this.dateCreated = dateCreated;
         this.dateUpdated = dateUpdated;
     }

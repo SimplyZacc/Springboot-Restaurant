@@ -1,10 +1,11 @@
 package com.example.restaurant.service;
 
-import java.time.LocalDateTime;
 import java.util.List;
+import java.util.ArrayList;
 
 import org.springframework.stereotype.Service;
 
+import com.example.restaurant.data.dto.FoodDto;
 import com.example.restaurant.data.model.Food;
 import com.example.restaurant.repository.FoodRepository;
 
@@ -17,34 +18,70 @@ public class FoodService {
         this.foodRepository = foodRepository;
     }
 
-    public List<Food> getAllFood() {
-        List<Food> food = foodRepository.findAll();
+    public List<FoodDto> getAllFoodDto() {
+        List<Food> foods = foodRepository.findAll();
+        List<FoodDto> foodList = new ArrayList<FoodDto>();
 
-        return food;
+        for (Food food : foods) {
+            foodList.add(new FoodDto(food.getFoodTypeId(), food.getFoodName(), food.getPrice(), food.getImageUrl()));
+        }
+        
+
+        return foodList;
     }
 
-    public Food getFood(int id) {
+    public FoodDto getFoodDto(int id) {
         Food food = foodRepository.findById(id);
 
-        return food;
+        return new FoodDto(food.getFoodTypeId(), food.getFoodName(), food.getPrice(), food.getImageUrl());
     }
 
-    public List<Food> getFoodByAmount(int amount) {
-        List<Food> food = foodRepository.findAmount(amount);
+    public List<FoodDto> getAmountOfFoodDto(int amount) {
+        List<Food> foods = foodRepository.findAmount(amount);
+        List<FoodDto> foodList = new ArrayList<FoodDto>();
 
-        return food;
+        for (Food food : foods) {
+            foodList.add(new FoodDto(food.getFoodTypeId(), food.getFoodName(), food.getPrice(), food.getImageUrl()));
+        }
+
+        return foodList;
     }
 
     public boolean insertFood(Food food) {
-        food.setDateCreated(LocalDateTime.now());
-        food.setDateUpdated(LocalDateTime.now());
+        // food.setDateCreated(LocalDateTime.now());
+        // food.setDateUpdated(LocalDateTime.now());
         int insertStatus = foodRepository.save(food);
         boolean status = false;
-        if (insertStatus == 0)
-        {
+        if (insertStatus == 0) {
             status = false;
+        } else {
+            status = true;
         }
-        else {
+        return status;
+    }
+    
+    public boolean updateFood(int id, Food food) {
+
+        // food.setDateUpdated(LocalDateTime.now());
+
+        int updateStatus = foodRepository.update(food, id);
+
+        boolean status = false;
+        if (updateStatus == 0) {
+            status = false;
+        } else {
+            status = true;
+        }
+        return status;
+    }
+    
+    public boolean deleteFood(int id) {
+        int deleteStatus = foodRepository.deleteById(id);
+        
+        boolean status =false;
+        if (deleteStatus == 0) {
+            status = false;
+        } else {
             status = true;
         }
         return status;

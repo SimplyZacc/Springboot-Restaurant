@@ -26,7 +26,7 @@ public class FoodRepository {
     }
 
     public List<Food> findAmount(int amount) {
-        return jdbcTemplate.query("SELECT TOP ? * FROM food",
+        return jdbcTemplate.query("SELECT TOP (?) * FROM food",
                 BeanPropertyRowMapper.newInstance(Food.class), amount);
     }
 
@@ -37,11 +37,11 @@ public class FoodRepository {
                 });
     }
 
-    public int update(Food food) {
+    public int update(Food food, int id) {
         return jdbcTemplate.update(
                 "UPDATE food SET food_type_id=?, food_name=?, price=?,image_url=?, date_created=?, date_updated=? WHERE food_id=?",
                 new Object[] { food.getFoodTypeId(), food.getFoodName(), food.getPrice(), food.getImageUrl(),
-                        food.getDateCreated(), food.getDateUpdated(), food.getId() });
+                        food.getDateCreated(), food.getDateUpdated(), id });
     }
 
     public int deleteById(int id) {
