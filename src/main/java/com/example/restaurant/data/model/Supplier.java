@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 
 public class Supplier {
     private int supplierId;
-    private int supplierName;
+    private String supplierName;
     private boolean isActive;
     private int phoneNo; // create phone number table and class incase multiple numbers and then reference this class
     private String address1; // create address table
@@ -15,9 +15,18 @@ public class Supplier {
 
 
     public Supplier() {
+        this.supplierId = 0;
+        this.supplierName = "";
+        this.isActive = false;
+        this.phoneNo = 0;
+        this.address1 = "";
+        this.address2 = "";
+        this.parish = "";
+        this.dateCreated = LocalDateTime.now();
+        this.dateUpdated = LocalDateTime.now();
     }
 
-    public Supplier(int supplierId, int supplierName, boolean isActive, int phoneNo, String address1, String address2, String parish, LocalDateTime dateCreated, LocalDateTime dateUpdated) {
+    public Supplier(int supplierId, String supplierName, boolean isActive, int phoneNo, String address1, String address2, String parish, LocalDateTime dateCreated, LocalDateTime dateUpdated) {
         this.supplierId = supplierId;
         this.supplierName = supplierName;
         this.isActive = isActive;
@@ -37,11 +46,11 @@ public class Supplier {
         this.supplierId = supplierId;
     }
 
-    public int getSupplierName() {
+    public String getSupplierName() {
         return this.supplierName;
     }
 
-    public void setSupplierName(int supplierName) {
+    public void setSupplierName(String supplierName) {
         this.supplierName = supplierName;
     }
 
