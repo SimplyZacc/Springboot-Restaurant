@@ -65,7 +65,7 @@ public class FoodTypeRepository {
         int updated = 0;
         try {
             updated = jdbcTemplate.update(
-                    "UPDATE foodtype SET [food_type_name]=?, [is_active]=? date_updated=? WHERE [food_type_id]=?",
+                    "UPDATE foodtype SET [food_type_name]=?, [is_active]=?, date_updated=? WHERE [food_type_id]=?",
                     new Object[] { food.getFoodTypeName(), food.getActive(), LocalDateTime.now(), id });
         } catch (Exception e) {
             logger.error("Error updating food type in foodtype table: {}", e);

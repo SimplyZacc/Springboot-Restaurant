@@ -1,8 +1,6 @@
 package com.example.restaurant.data.model;
 
-import java.util.Arrays;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -73,11 +71,11 @@ public class User {
 
     JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
 
-    Set<Role> newRoles = new HashSet<>(jdbcTemplate.query(
+    roles = new HashSet<>(jdbcTemplate.query(
         "SELECT role_name as name, role.role_id as id FROM role LEFT JOIN user_role ON user_role.role_id = role.role_id WHERE user_role.user_id = ?",
         BeanPropertyRowMapper.newInstance(Role.class), this.id));
 
-    return newRoles;
+    return roles;
   }
 
   public void setRoles(Set<Role> roles) {
