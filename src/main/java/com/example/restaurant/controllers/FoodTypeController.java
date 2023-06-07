@@ -31,36 +31,36 @@ public class FoodTypeController {
 
     @GetMapping("")
     public ResponseEntity<List<FoodType>> getAllFoodTypes() {
-        final List<FoodType> foodList = foodTypeService.getAllFoodTypes();
-        return ResponseEntity.ok(foodList);
+        final List<FoodType> foodTypeList = foodTypeService.getAllFoodTypes();
+        return ResponseEntity.ok(foodTypeList);
     }
 
     @GetMapping("/{foodId}")
     public ResponseEntity<FoodType> getFood(@PathVariable(value = "foodId") int id) {
-        final FoodType food = foodTypeService.getFoodType(id);
-        return ResponseEntity.ok(food);
+        final FoodType foodType = foodTypeService.getFoodType(id);
+        return ResponseEntity.ok(foodType);
     }
 
     @PostMapping(path = "/", consumes = APPLICATION_JSON_VALUE)
     @PreAuthorize("hasRole('ROLE_STAFF') or hasRole('ROLE_ADMIN')")
-    public ResponseEntity<FoodType> createFood(@RequestBody FoodType food) {
-        final boolean orderCreated = foodTypeService.insertFoodType(food);
+    public ResponseEntity<FoodType> createFood(@RequestBody FoodType foodType) {
+        final boolean orderCreated = foodTypeService.insertFoodType(foodType);
         if (!orderCreated) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
-        return new ResponseEntity<>(food, HttpStatus.CREATED);
+        return new ResponseEntity<>(foodType, HttpStatus.CREATED);
     }
     
     @PutMapping(path = "/{id}", consumes = APPLICATION_JSON_VALUE)
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    public ResponseEntity<FoodType> editFood(@PathVariable(value = "id") int id,@RequestBody FoodType food)
+    public ResponseEntity<FoodType> editFood(@PathVariable(value = "id") int id,@RequestBody FoodType foodType)
     {
-        final boolean updatedOrder = foodTypeService.updateFoodType(id, food);
+        final boolean updatedOrder = foodTypeService.updateFoodType(id, foodType);
         if (!updatedOrder) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
 
-        return new ResponseEntity<>(food, HttpStatus.OK);
+        return new ResponseEntity<>(foodType, HttpStatus.OK);
     }
 
     @DeleteMapping(path = "/{id}")
