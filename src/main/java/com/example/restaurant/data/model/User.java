@@ -67,7 +67,7 @@ public class User {
   public Set<Role> getRoles() {
     DriverManagerDataSource dataSource = new DriverManagerDataSource();
     dataSource.setDriverClassName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-    dataSource.setUrl("jdbc:sqlserver://LAPTOP-4C4TUAER;databaseName=food;trustServerCertificate=true");
+    dataSource.setUrl("jdbc:sqlserver://SZ;databaseName=food;trustServerCertificate=true");
     dataSource.setUsername("Tester");
     dataSource.setPassword("Test@123");
 

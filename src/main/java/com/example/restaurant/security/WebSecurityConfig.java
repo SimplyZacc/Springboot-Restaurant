@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
-import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -21,10 +21,7 @@ import com.example.restaurant.security.jwt.AuthTokenFilter;
 import com.example.restaurant.security.services.UserDetailsServiceImpl;
 
 @Configuration
-// @EnableWebSecurity
-@EnableGlobalMethodSecurity(
-    // securedEnabled = true,
-    // jsr250Enabled = true,
+@EnableMethodSecurity(
     prePostEnabled = true)
 public class WebSecurityConfig {
 
@@ -66,11 +63,10 @@ public class WebSecurityConfig {
     http
         .cors(withDefaults())
         .csrf(crsf -> crsf.disable())
-        // .disable()
         .exceptionHandling(handling -> handling.authenticationEntryPoint(unauthorizedHandler))
         .sessionManagement(management -> management.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
         .authorizeHttpRequests(requests -> requests.requestMatchers("/api/auth/**").permitAll()
-            .requestMatchers("/**").permitAll() // change lata
+            .requestMatchers("/**").permitAll() 
             .requestMatchers("/api/test/**").permitAll()
             .requestMatchers(h2ConsolePath + "/**").permitAll()
             .anyRequest().authenticated());

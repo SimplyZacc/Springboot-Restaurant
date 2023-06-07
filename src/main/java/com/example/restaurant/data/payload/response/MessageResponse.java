@@ -1,4 +1,4 @@
-package com.example.restaurant.payload.response;
+package com.example.restaurant.data.payload.response;
 
 public class MessageResponse {
 	private String message;

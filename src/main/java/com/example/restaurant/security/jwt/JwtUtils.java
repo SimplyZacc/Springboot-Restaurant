@@ -28,13 +28,13 @@ public class JwtUtils {
   @Value("${app.jwtCookieName}")
   private String jwtCookie;
 
-  public String getJwtFromCookies(HttpServletRequest request) {
-    Cookie cookie = WebUtils.getCookie(request, jwtCookie);
-    if (cookie != null) {
-      return cookie.getValue();
-    } else {
-      return null;
+  public String getJwtFromRequest(HttpServletRequest request) {
+    String header = request.getHeader("Authorization");
+    if (header != null && header.startsWith("Bearer ")) {
+      return header.replace("Bearer ", "");
     }
+
+    return null;
   }
 
   public ResponseCookie generateJwtCookie(UserDetailsImpl userPrincipal) {

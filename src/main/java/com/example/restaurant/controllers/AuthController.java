@@ -24,10 +24,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.restaurant.data.model.Role;
 import com.example.restaurant.data.model.User;
-import com.example.restaurant.payload.request.LoginRequest;
-import com.example.restaurant.payload.request.SignupRequest;
-import com.example.restaurant.payload.response.UserInfoResponse;
-import com.example.restaurant.payload.response.MessageResponse;
+import com.example.restaurant.data.payload.request.LoginRequest;
+import com.example.restaurant.data.payload.request.SignupRequest;
+import com.example.restaurant.data.payload.response.MessageResponse;
+import com.example.restaurant.data.payload.response.UserInfoResponse;
 import com.example.restaurant.repository.RoleRepository;
 import com.example.restaurant.repository.UserRepository;
 import com.example.restaurant.security.jwt.JwtUtils;
@@ -72,7 +72,8 @@ public class AuthController {
         .body(new UserInfoResponse(userDetails.getId(),
             userDetails.getUsername(),
             userDetails.getEmail(),
-            roles));
+            roles,
+            jwtCookie.getValue().toString()));
   }
 
   @PostMapping("/signup")

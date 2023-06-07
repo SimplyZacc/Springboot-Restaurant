@@ -1,4 +1,4 @@
-package com.example.restaurant.payload.request;
+package com.example.restaurant.data.payload.request;
 
 import java.util.Set;
 
