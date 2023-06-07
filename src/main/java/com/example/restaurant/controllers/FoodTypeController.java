@@ -21,7 +21,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 
 @RestController
-@RequestMapping(path = { "/api/food" }, produces = APPLICATION_JSON_VALUE)
+@RequestMapping(path = { "/api/foodtype" }, produces = APPLICATION_JSON_VALUE)
 public class FoodTypeController {
     private final FoodTypeService foodTypeService;
 
