@@ -52,7 +52,7 @@ public class FoodRepository {
         try {
             foods = jdbcTemplate.query(
                     "SELECT TOP (?) [food_id] as id, [food_type_id] as foodTypeId, [food_name] as foodName, [price], [image_url] as imageUrl, [date_created], [date_updated] FROM food",
-                    BeanPropertyRowMapper.newInstance(Food.class));
+                    BeanPropertyRowMapper.newInstance(Food.class),amount);
         } catch (Exception e) {
             logger.error("Error getting {} foods from food table: {}", amount, e);
         }
