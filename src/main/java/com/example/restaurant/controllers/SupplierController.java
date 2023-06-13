@@ -21,8 +21,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 
 @RestController
-@RequestMapping(path = { "/api/supplier" }, produces = APPLICATION_JSON_VALUE)
 @PreAuthorize("hasRole('ROLE_STAFF') or hasRole('ROLE_ADMIN')")
+@RequestMapping(path = { "/api/supplier" }, produces = APPLICATION_JSON_VALUE)
 public class SupplierController {
     private final SupplierService supplierService;
 
@@ -36,26 +36,25 @@ public class SupplierController {
         return ResponseEntity.ok(supplierList);
     }
 
-    @GetMapping("/{foodId}")
-    public ResponseEntity<Supplier> getFood(@PathVariable(value = "foodId") int id) {
+    @GetMapping("/{supplierId}")
+    public ResponseEntity<Supplier> getSupplier(@PathVariable(value = "supplierId") int id) {
         final Supplier supplier = supplierService.getSupplier(id);
         return ResponseEntity.ok(supplier);
     }
 
     @PostMapping(path = "/", consumes = APPLICATION_JSON_VALUE)
-    public ResponseEntity<Supplier> createFood(@RequestBody Supplier supplier) {
-        final boolean orderCreated = supplierService.insertSupplier(supplier);
-        if (!orderCreated) {
+    public ResponseEntity<Supplier> createSupplier(@RequestBody Supplier supplier) {
+        final boolean created = supplierService.insertSupplier(supplier);
+        if (!created) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
         return new ResponseEntity<>(supplier, HttpStatus.CREATED);
     }
-    
+
     @PutMapping(path = "/{id}", consumes = APPLICATION_JSON_VALUE)
-    public ResponseEntity<Supplier> editFood(@PathVariable(value = "id") int id,@RequestBody Supplier supplier)
-    {
-        final boolean updatedOrder = supplierService.updateSupplier(id, supplier);
-        if (!updatedOrder) {
+    public ResponseEntity<Supplier> editSupplier(@PathVariable(value = "id") int id, @RequestBody Supplier supplier) {
+        final boolean updated = supplierService.updateSupplier(id, supplier);
+        if (!updated) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
 
@@ -63,10 +62,9 @@ public class SupplierController {
     }
 
     @DeleteMapping(path = "/{id}")
-    public ResponseEntity<Boolean> deleteFood(@PathVariable(value = "id") int id)
-    {
-        final boolean deleteOrder = supplierService.deleteSupplier(id);
+    public ResponseEntity<Boolean> deleteSupplier(@PathVariable(value = "id") int id) {
+        final boolean deleted = supplierService.deleteSupplier(id);
 
-        return ResponseEntity.ok(deleteOrder);
+        return ResponseEntity.ok(deleted);
     }
 }
