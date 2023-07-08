@@ -17,7 +17,7 @@ import com.example.restaurant.data.model.Supplier;
 @Repository
 public class SupplierRepository {
 
-    private static final Logger logger = LoggerFactory.getLogger(FoodTypeRepository.class);
+    private static final Logger logger = LoggerFactory.getLogger(SupplierRepository.class);
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
