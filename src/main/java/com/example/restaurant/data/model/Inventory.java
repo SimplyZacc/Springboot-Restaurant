@@ -13,6 +13,13 @@ public class Inventory {
 
 
     public Inventory() {
+        this.foodId = 0;
+        this.supplierId = 0;
+        this.amount = 0;
+        this.minAmnt = 0;
+        this.maxAmnt = 0;
+        this.dateCreated = LocalDateTime.now();
+        this.dateUpdated = LocalDateTime.now();
     }
 
     public Inventory(int foodId, int supplierId, int amount, int minAmnt, int maxAmnt, LocalDateTime dateCreated, LocalDateTime dateUpdated) {
